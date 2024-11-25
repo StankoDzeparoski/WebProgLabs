@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <title>Songs Homepage - Welcome to My Music Store</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to My Music Store</h1>
+</header>
+<main>
+    <h2>Choose a song:</h2>
+<!--    <div>Ip Address:<th:block th:text="${ipAddress}"></th:block></div>-->
+<!--    <div>Client Agent:<th:block th:text="${clientAgent}"></th:block></div>-->
+<!--    <li th:each="category : ${categories}"><th:block th:text="${category.name} + ${category.description}"></th:block></li>-->
+    <!-- Display radio buttons for each song,
+            the value should be the trackId
+            and the displayed text should be Title: <songTitle>, Genre:<genre>, Release Year: <releaseYear> -->
+    <form th:method="POST" th:action="@{/listSongs}">
+        <div th:each="song : ${songs}">
+            <input th:name="radioSong" type="radio" th:value="${song.trackId}">
+            <label th:for="radioSong" th:text="${song.title} + ${' '} + ${song.genre} + ${' '} + ${song.releaseYear}" ></label>
+            <br>
+        </div>
+<!--        <label for="name">Name:</label>:<input id="name" type="radio" name="name">-->
+<!--        <input type="radio" name="trackId" value="1"> Song 1 <br/>-->
+<!--        <input type="radio" name="trackId" value="2"> Song 2 <br/>-->
+<!--        <input type="radio" name="trackId" value="3"> Song 3 <br/>-->
+        <input type='submit' value='Submit'>
+    </form>
+</main>
+</body>
+</html>
