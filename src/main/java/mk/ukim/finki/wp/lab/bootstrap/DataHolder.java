@@ -18,7 +18,7 @@ public class DataHolder {
     @PostConstruct
     public void init(){
         this.artists.add(new Artist((long)1, "John", "Stewart", "Britain"));
-        this.artists.add(new Artist((long)2, "Brad", "Stewart", "Britain"));
+        this.artists.add(new Artist((long)2, "Brad", "Stewart", "Canada"));
         this.artists.add(new Artist((long)3, "Daemon", "Stewart", "Britain"));
         this.artists.add(new Artist((long)4, "Richard", "Stewart", "Britain"));
         this.artists.add(new Artist((long)5, "Kon", "Stewart", "Britain"));

@@ -49,24 +49,4 @@ public class ArtistController {
         return "redirect:/songDetails?TrackId=" + radioSong;
     }
 
-    @GetMapping("/Artist/search")
-    public String getSearchPage(@RequestParam(required = false) List<Artist> filteredArtists, Model model) {
-
-
-        return "searchArtist";
-    }
-
-//    @PostMapping("/Artist/search")
-//    public String filterArtistSearch(@RequestParam(required = false) String nameArtist,
-//                                     @RequestParam(required = false) String lastNameArtist,
-//                                     @RequestParam(required = false) String artBio, Model model) {
-//
-//        List<Artist> filteredArtists = artistService.filterBySearch(nameArtist, lastNameArtist, artBio);
-//
-//        model.addAttribute("filteredArtists", filteredArtists);
-//
-//        return "searchArtist";
-//    }
-
-
 }

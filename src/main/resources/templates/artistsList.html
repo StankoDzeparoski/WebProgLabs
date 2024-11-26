@@ -51,8 +51,27 @@
     </table>
 </aside>
 
-    <div class="col-sm-12 col-md-12">
-        <a href="/Artist/search" class="btn btn-block btn-dark">Artist Search</a>
+    <!-- Search -->
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-md-5">
+                <form action="/Artist" method="GET">
+                    <input th:name="radioSong" th:value="${songId}" type="hidden">
+                    <div class="form-group">
+                        <label for="search">Search</label>
+                        <input type="text"
+                               class="form-control"
+                               id="search"
+                               name="search"
+                               placeholder=" Enter search ">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                    <a type="button" class="btn btn-primary" href="/songs">Back</a>
+                </form>
+            </div>
+
+        </div>
     </div>
+
 </body>
 </html>
