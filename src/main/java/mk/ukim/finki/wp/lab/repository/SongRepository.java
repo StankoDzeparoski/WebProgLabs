@@ -14,6 +14,10 @@ public class SongRepository {
         return DataHolder.songs;
     }
 
+    public Optional<Song> findBySongId(Long id){
+        return DataHolder.songs.stream().filter(song -> song.getId().equals(id)).findFirst();
+    }
+
     public Optional<Song> findByTrackId(String id){
         return DataHolder.songs.stream().filter(song -> song.getTrackId().equals(id)).findFirst();
     }
@@ -32,10 +36,11 @@ public class SongRepository {
         return newSong;
     }
 
-    public void delete(String id){
-        if(id.isEmpty())
+
+    public void delete(Long id){
+        if(id == null)
             return;
-        DataHolder.songs.removeIf(song -> song.getTrackId().equals(id));
+        DataHolder.songs.removeIf(song -> song.getId().equals(id));
     }
 
 }
