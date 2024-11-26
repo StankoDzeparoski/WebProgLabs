@@ -55,4 +55,9 @@ public class ArtistServiceImpl implements ArtistService {
             return;
         artistRepository.delete(id);
     }
+
+    @Override
+    public List<Artist> filterBySearch(String nameArtist) {
+        return artistRepository.filterBySearch(nameArtist);
+    }
 }

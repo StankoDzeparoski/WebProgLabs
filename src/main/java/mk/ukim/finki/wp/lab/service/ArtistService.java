@@ -13,4 +13,5 @@ public interface ArtistService {
     Song addSongToArtist(Artist artist, Song song);
     Artist Save(Long id, String firstName, String lastName, String bio);
     void delete(Long id);
+    List<Artist> filterBySearch(String nameArtist);
 }

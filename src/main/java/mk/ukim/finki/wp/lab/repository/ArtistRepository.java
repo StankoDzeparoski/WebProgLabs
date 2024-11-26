@@ -6,6 +6,7 @@ import mk.ukim.finki.wp.lab.model.Artist;
 import mk.ukim.finki.wp.lab.model.Song;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,5 +35,17 @@ public class ArtistRepository {
 
     public void delete(Long id){
         DataHolder.artists.removeIf(art -> art.getId().equals(id));
+    }
+
+    public List<Artist> filterBySearch(String nameArtist){
+        List<Artist> filteredArtists = new ArrayList<>();
+
+        if(nameArtist != null){
+            filteredArtists = DataHolder.artists.stream().filter(i -> i.getFirstName().toLowerCase().contains(nameArtist.toLowerCase())
+                    || i.getLastName().toLowerCase().contains(nameArtist.toLowerCase())
+                    || i.getBio().toLowerCase().contains(nameArtist.toLowerCase())).toList();
+
+        }
+        return filteredArtists;
     }
 }

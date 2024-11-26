@@ -1,5 +1,6 @@
 package mk.ukim.finki.wp.lab.web.controller;
 
+import jakarta.servlet.http.HttpSession;
 import mk.ukim.finki.wp.lab.model.Artist;
 import mk.ukim.finki.wp.lab.model.Song;
 import mk.ukim.finki.wp.lab.service.ArtistService;
@@ -7,6 +8,10 @@ import mk.ukim.finki.wp.lab.service.SongService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class ArtistController {
@@ -20,11 +25,15 @@ public class ArtistController {
     }
 
     @GetMapping("/Artist")
-    public String getArtistPage(@RequestParam(required = false) String radioSong, Model model) {
+    public String getArtistPage(@RequestParam(required = false) String radioSong, @RequestParam(required = false) String search,
+                                 Model model) {
         model.addAttribute("songId", radioSong);
         model.addAttribute("songs", songService.listSongs());
-        model.addAttribute("artists", artistService.listArtists());
 
+        if (search != null && !search.isEmpty()){
+            model.addAttribute("artists", artistService.filterBySearch(search));
+        }
+        else model.addAttribute("artists", artistService.listArtists());
         return "artistsList";
     }
 
@@ -39,4 +48,25 @@ public class ArtistController {
 
         return "redirect:/songDetails?TrackId=" + radioSong;
     }
+
+    @GetMapping("/Artist/search")
+    public String getSearchPage(@RequestParam(required = false) List<Artist> filteredArtists, Model model) {
+
+
+        return "searchArtist";
+    }
+
+//    @PostMapping("/Artist/search")
+//    public String filterArtistSearch(@RequestParam(required = false) String nameArtist,
+//                                     @RequestParam(required = false) String lastNameArtist,
+//                                     @RequestParam(required = false) String artBio, Model model) {
+//
+//        List<Artist> filteredArtists = artistService.filterBySearch(nameArtist, lastNameArtist, artBio);
+//
+//        model.addAttribute("filteredArtists", filteredArtists);
+//
+//        return "searchArtist";
+//    }
+
+
 }

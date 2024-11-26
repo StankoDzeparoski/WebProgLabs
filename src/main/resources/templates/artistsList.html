@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -27,11 +28,6 @@
     </style>
 </head>
 <body>
-<header>
-    <h1>Select the Artist to add to the List of Performers </h1>
-</header>
-<section>
-    <h2>Select artist:</h2>
 
     <form th:method="POST" th:action="@{/Artist}">
         <input th:name="radioSong" th:value="${songId}" type="hidden">
@@ -54,5 +50,9 @@
         </tr>
     </table>
 </aside>
+
+    <div class="col-sm-12 col-md-12">
+        <a href="/Artist/search" class="btn btn-block btn-dark">Artist Search</a>
+    </div>
 </body>
 </html>
