@@ -1,6 +1,7 @@
 package mk.ukim.finki.wp.lab.web.controller;
 
 import mk.ukim.finki.wp.lab.model.Album;
+import mk.ukim.finki.wp.lab.model.Genre;
 import mk.ukim.finki.wp.lab.model.Song;
 import mk.ukim.finki.wp.lab.service.AlbumService;
 import mk.ukim.finki.wp.lab.service.SongService;
@@ -65,9 +66,11 @@ public class SongController {
     @PostMapping("/songs/add")
     public String saveSong(@RequestParam String title,
                               @RequestParam String trackId,
-                              @RequestParam String genre,
+                              @RequestParam String genreName,
+                              @RequestParam String genreDesc,
                               @RequestParam Integer releaseYear,
                               @RequestParam Long album){
+        Genre genre = new Genre(genreName, genreDesc);
         this.songService.Save(trackId,title, genre, releaseYear, album);
         this.albumService.findById(album).getSongs().add(songService.findByTrackId(trackId));
         return "redirect:/songs";

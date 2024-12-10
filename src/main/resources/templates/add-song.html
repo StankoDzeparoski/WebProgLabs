@@ -31,14 +31,24 @@
                  placeholder=" Enter Song TrackId">
         </div>
         <div class="form-group">
-          <label for="genre">Genre</label>
+          <label for="genreName">GenreName</label>
           <input type="text"
                  class="form-control"
-                 id="genre"
-                 name="genre"
-                 th:value="(${song} != null ? ${song.getGenre()} : '')"
+                 id="genreName"
+                 name="genreName"
+                 th:value="(${song} != null ? ${song.getGenre().getName()} : '')"
                  required
-                 placeholder=" Enter Song Genre">
+                 placeholder=" Enter Song GenreName">
+        </div>
+        <div class="form-group">
+          <label for="genreDesc">GenreDesc</label>
+          <input type="text"
+                 class="form-control"
+                 id="genreDesc"
+                 name="genreDesc"
+                 th:value="(${song} != null ? ${song.getGenre().getDescription()} : '')"
+                 required
+                 placeholder=" Enter Song GenreDesc">
         </div>
         <div class="form-group">
           <label for="releaseYear">releaseYear</label>

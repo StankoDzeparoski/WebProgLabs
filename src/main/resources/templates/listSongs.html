@@ -20,7 +20,7 @@
         <div th:each="song : ${songs}">
             <input th:name="radioSong" type="radio" th:value="${song.trackId}">
             <label th:for="radioSong"
-                   th:text="${song.title} + ${' '} + ${song.genre} + ${' '} + ${song.releaseYear} + ${' '} + ${song.album.getName()}" >
+                   th:text="${song.title} + ${' '} + ${song.getGenre().getName()} + ${' '} + ${song.getGenre().getDescription()} + ${' '} + ${song.releaseYear} + ${' '} + ${song.album.getName()}" >
             </label>
 
             <a th:href="@{/songs/delete/{id} (id=${song.getId()})}">

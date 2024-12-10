@@ -22,14 +22,15 @@ public class Song {
     private Long id;
     private String trackId;
     private String title;
-    private String genre;
+    @OneToOne
+    private Genre genre;
     private int releaseYear;
     @ManyToMany
     private List<Artist> performers;
     @ManyToOne
     private Album album;
 
-    public Song(String trackId, String title, String genre, int releaseYear, List<Artist> performers, Album album) {
+    public Song(String trackId, String title, Genre genre, int releaseYear, List<Artist> performers, Album album) {
 //        this.id = (long)(Math.random() * 1000);
         this.trackId = trackId;
         this.title = title;
@@ -39,7 +40,28 @@ public class Song {
         this.album = album;
     }
 
-    public Song(String trackId, String title, String genre, int releaseYear, Album album) {
+    public Song(Long id, String trackId, String title, String genreName, String genreDesc,
+                int releaseYear, List<Artist> performers, Album album) {
+        this.id = id;
+        this.trackId = trackId;
+        this.title = title;
+        this.genre = new Genre(genreName,genreDesc);
+        this.releaseYear = releaseYear;
+        this.performers = performers;
+        this.album = album;
+    }
+
+    public Song(String trackId, String title, String genreName, String genreDesc, int releaseYear, Album album) {
+//        this.id = (long)(Math.random() * 1000);
+        this.trackId = trackId;
+        this.title = title;
+        this.genre = new Genre(genreName,genreDesc);
+        this.releaseYear = releaseYear;
+        this.performers = new ArrayList<Artist>();
+        this.album = album;
+    }
+
+    public Song(String trackId, String title, Genre genre, int releaseYear, Album album) {
 //        this.id = (long)(Math.random() * 1000);
         this.trackId = trackId;
         this.title = title;

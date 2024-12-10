@@ -9,9 +9,15 @@ INSERT INTO ARTIST (first_name, last_name, BIO) VALUES
                                                     ('Daemon', 'Stewart', 'Britain'),
                                                     ('Richard', 'Stewart', 'Britain'),
                                                     ('Kon', 'Stewart', 'Britain');
-INSERT INTO SONG (track_id, title, genre, release_year, album_id) VALUES
-                                                                      ('1', 'SampleTitle1', 'Pop', '2049', 1),
-                                                                      ('2', 'SampleTitle2', 'Rap', '2020', 2),
-                                                                      ('3', 'SampleTitle3', 'Jazz', '2023', 4),
-                                                                      ('4', 'SampleTitle4', 'Pop', '2024', 3),
-                                                                      ('5', 'SampleTitle5', 'Pop', '2024', 5);
+INSERT INTO GENRE (name, description) VALUES
+    ('Pop', 'Pop genre'),
+    ('Rap', 'Rap genre'),
+    ('Jazz', 'Jazz genre'),
+    ('Pop', 'Pop genre'),
+    ('Pop', 'Pop genre');
+INSERT INTO SONG (track_id, title, genre_id, release_year, album_id) VALUES
+                                                                      ('1', 'SampleTitle1', 1, '2049', 1),
+                                                                      ('2', 'SampleTitle2', 2, '2020', 2),
+                                                                      ('3', 'SampleTitle3', 3, '2023', 4),
+                                                                      ('4', 'SampleTitle4', 4, '2024', 3),
+                                                                      ('5', 'SampleTitle5', 5, '2024', 5);

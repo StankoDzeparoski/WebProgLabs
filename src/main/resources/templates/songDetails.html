@@ -10,7 +10,8 @@
    <h1 th:text="${selectedSong.title}"></h1>
 </header>
 <section>
-    <h2 th:text="${selectedSong.genre}">Genre</h2>
+    <h2 th:text="${selectedSong.genre.getName()}">GenreName</h2>
+    <h2 th:text="${selectedSong.genre.getDescription()}">GenreDesc</h2>
     <h2 th:text="${selectedSong.releaseYear}">Year</h2>
     <h2 >Performers:</h2>
     <ul th:each="performer : ${selectedSong.performers}">
@@ -29,7 +30,7 @@
         <div th:each="song : ${artist.getSongs()}">
             <br>
             <input th:name="radioSong" type="radio" th:value="${song.trackId}">
-            <label th:for="radioSong" th:text="${song.title} + ${' '} + ${song.genre} + ${' '} + ${song.releaseYear}" ></label>
+            <label th:for="radioSong" th:text="${song.title} + ${' '} + ${song.getGenre().getName()} + ${' '} + ${song.releaseYear}" ></label>
             <br>
         </div>
 
