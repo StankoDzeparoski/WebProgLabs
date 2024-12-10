@@ -1,9 +1,9 @@
 package mk.ukim.finki.wp.lab.service.impl;
 
-import mk.ukim.finki.wp.lab.bootstrap.DataHolder;
 import mk.ukim.finki.wp.lab.model.Artist;
 import mk.ukim.finki.wp.lab.model.Song;
-import mk.ukim.finki.wp.lab.repository.ArtistRepository;
+import mk.ukim.finki.wp.lab.repository.impl.ArtistRepository;
+import mk.ukim.finki.wp.lab.repository.jpa.ArtistRepositoryJpa;
 import mk.ukim.finki.wp.lab.service.ArtistService;
 import org.springframework.stereotype.Service;
 
@@ -12,23 +12,25 @@ import java.util.List;
 @Service
 public class ArtistServiceImpl implements ArtistService {
 
+    private final ArtistRepositoryJpa artistRepositoryJpa;
     private final ArtistRepository artistRepository;
 
-    public ArtistServiceImpl(ArtistRepository artistRepository) {
+    public ArtistServiceImpl(ArtistRepositoryJpa artistRepositoryJpa, ArtistRepository artistRepository) {
+        this.artistRepositoryJpa = artistRepositoryJpa;
         this.artistRepository = artistRepository;
     }
 
     @Override
     public List<Artist> listArtists() {
-        if(artistRepository.findAll().isEmpty()) {
+        if(artistRepositoryJpa.findAll().isEmpty()) {
             return null;
         }
-        return artistRepository.findAll();
+        return artistRepositoryJpa.findAll();
     }
 
     @Override
     public Artist ArtistfindById(Long id) {
-        return artistRepository.findById(id).orElse(null);
+        return artistRepositoryJpa.findById(id).orElse(null);
     }
 
     public Song addSongToArtist(Artist artist, Song song) {
@@ -45,7 +47,7 @@ public class ArtistServiceImpl implements ArtistService {
             return null;
         }
         Artist artist = new Artist(id, firstName, lastName, bio);
-        artistRepository.Save(artist);
+        artistRepositoryJpa.save(artist);
         return artist;
     }
 
@@ -53,11 +55,60 @@ public class ArtistServiceImpl implements ArtistService {
     public void delete(Long id) {
         if(id == null)
             return;
-        artistRepository.delete(id);
+        artistRepositoryJpa.deleteById(id);
     }
 
     @Override
     public List<Artist> filterBySearch(String nameArtist) {
-        return artistRepository.filterBySearch(nameArtist);
+        return artistRepositoryJpa.search(nameArtist);
     }
+
+//    private final ArtistRepository artistRepository;
+//
+//    public ArtistServiceImpl(ArtistRepository artistRepository) {
+//        this.artistRepository = artistRepository;
+//    }
+//
+//    @Override
+//    public List<Artist> listArtists() {
+//        if(artistRepository.findAll().isEmpty()) {
+//            return null;
+//        }
+//        return artistRepository.findAll();
+//    }
+//
+//    @Override
+//    public Artist ArtistfindById(Long id) {
+//        return artistRepository.findById(id).orElse(null);
+//    }
+//
+//    public Song addSongToArtist(Artist artist, Song song) {
+//        if(artist == null || song == null)
+//            return null;
+//
+//        artistRepository.addSongToArtist(artist, song);
+//        return song;
+//    }
+//
+//    @Override
+//    public Artist Save(Long id, String firstName, String lastName, String bio) {
+//        if(id == null){
+//            return null;
+//        }
+//        Artist artist = new Artist(id, firstName, lastName, bio);
+//        artistRepository.Save(artist);
+//        return artist;
+//    }
+//
+//    @Override
+//    public void delete(Long id) {
+//        if(id == null)
+//            return;
+//        artistRepository.delete(id);
+//    }
+//
+//    @Override
+//    public List<Artist> filterBySearch(String nameArtist) {
+//        return artistRepository.filterBySearch(nameArtist);
+//    }
 }

@@ -17,11 +17,11 @@ public class DataHolder {
 
     @PostConstruct
     public void init(){
-        this.artists.add(new Artist((long)1, "John", "Stewart", "Britain"));
-        this.artists.add(new Artist((long)2, "Brad", "Stewart", "Canada"));
-        this.artists.add(new Artist((long)3, "Daemon", "Stewart", "Britain"));
-        this.artists.add(new Artist((long)4, "Richard", "Stewart", "Britain"));
-        this.artists.add(new Artist((long)5, "Kon", "Stewart", "Britain"));
+        this.artists.add(new Artist( "John", "Stewart", "Britain"));
+        this.artists.add(new Artist( "Brad", "Stewart", "Canada"));
+        this.artists.add(new Artist( "Daemon", "Stewart", "Britain"));
+        this.artists.add(new Artist( "Richard", "Stewart", "Britain"));
+        this.artists.add(new Artist( "Kon", "Stewart", "Britain"));
 
         this.albums.add(new Album("POP ALBUM", "Pop", "2049"));
         this.albums.add(new Album("RAP ALBUM", "Rap", "2020"));
