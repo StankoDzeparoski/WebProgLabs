@@ -22,6 +22,11 @@ public class AlbumServiceImpl implements AlbumService {
         return this.albumRepositoryJpa.findAll();
     }
 
+    @Override
+    public Album findById(Long id) {
+        return albumRepositoryJpa.findAlbumById(id);
+    }
+
 
 //    private final AlbumRepository albumRepository;
 //

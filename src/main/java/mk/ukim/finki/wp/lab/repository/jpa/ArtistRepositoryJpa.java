@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 //    public Song addSongToArtist(Artist artist, Song song){
@@ -18,6 +19,6 @@ import java.util.List;
 public interface ArtistRepositoryJpa extends JpaRepository<Artist, Long> {
     @Query("SELECT a FROM Artist a WHERE LOWER(a.firstName) LIKE LOWER(CONCAT('%', :name, '%')) OR LOWER(a.lastName) LIKE LOWER(CONCAT('%', :name, '%'))")
     List<Artist> search(String name);
-//    Artist findArtistBy
-//    Artist findArtistByIdMatches(Artist artist);
+    Optional<Artist> findById(long id);
+
 }

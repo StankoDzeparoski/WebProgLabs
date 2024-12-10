@@ -22,13 +22,19 @@ public class SongController {
     }
 
     @GetMapping("/songs")
-    public String getSongsPage(@RequestParam(required = false) String error, Model model){
+    public String getSongsPage(@RequestParam(required = false) String error, @RequestParam(required = false) Long search, Model model){
         if(error != null && !error.isEmpty()) {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
         }
-        List<Song> songs = this.songService.listSongs();
-        model.addAttribute("songs", songs);
+
+        if (search != null){
+            model.addAttribute("songs", songService.findAllByAlbum_Id(search));
+        } else {
+            List<Song> songs = this.songService.listSongs();
+            model.addAttribute("songs", songs);
+        }
+
         return "listSongs";
     }
 
@@ -63,6 +69,7 @@ public class SongController {
                               @RequestParam Integer releaseYear,
                               @RequestParam Long album){
         this.songService.Save(trackId,title, genre, releaseYear, album);
+        this.albumService.findById(album).getSongs().add(songService.findByTrackId(trackId));
         return "redirect:/songs";
 
     }

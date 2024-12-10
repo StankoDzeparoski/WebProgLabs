@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AlbumRepositoryJpa extends JpaRepository<Album, Long> {
-
+    Album findAlbumById(Long id);
 }
 

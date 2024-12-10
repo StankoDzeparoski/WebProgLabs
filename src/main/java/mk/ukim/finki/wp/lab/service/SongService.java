@@ -16,4 +16,5 @@ public interface SongService {
     void delete(Long id);
     void deleteByTrackId(String trackId);
     Optional<Song> findBySongId(Long songId);
+    List<Song> findAllByAlbum_Id(Long albumId);
 }

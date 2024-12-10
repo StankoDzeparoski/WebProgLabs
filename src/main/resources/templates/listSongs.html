@@ -40,6 +40,25 @@
     <div class="col-sm-12 col-md-12">
         <p th:text="(${error} != null ? ${error} : '')">
     </div>
+    <!-- Search -->
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-md-5">
+                <form action="/songs" method="GET">
+                    <div class="form-group">
+                        <label for="search">Search</label>
+                        <input type="text"
+                               class="form-control"
+                               id="search"
+                               name="search"
+                               placeholder=" Enter AlbumId ">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
 
 </main>
 </body>

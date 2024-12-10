@@ -50,6 +50,7 @@ public class SongServiceImpl implements SongService {
             song.getPerformers().remove(artist);
         }
         song.getPerformers().add(artist);
+        songRepositoryJpa.save(song);
         return artist;
     }
 
@@ -88,6 +89,10 @@ public class SongServiceImpl implements SongService {
         return songRepositoryJpa.findById(songId);
     }
 
+    @Override
+    public List<Song> findAllByAlbum_Id(Long albumId) {
+        return songRepositoryJpa.findAllByAlbum_Id(albumId);
+    }
 
 
 //

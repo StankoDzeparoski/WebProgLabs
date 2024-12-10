@@ -40,6 +40,7 @@ public class ArtistServiceImpl implements ArtistService {
         }
 //        artistRepositoryJpa.findAll().removeIf(art -> art.getSongs().contains(song));
         artist.getSongs().add(song);
+        artistRepositoryJpa.save(artist);
         return song;
     }
 
