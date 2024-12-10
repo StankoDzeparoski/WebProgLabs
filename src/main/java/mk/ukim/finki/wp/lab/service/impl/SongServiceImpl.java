@@ -4,8 +4,8 @@ import jakarta.transaction.Transactional;
 import mk.ukim.finki.wp.lab.model.Album;
 import mk.ukim.finki.wp.lab.model.Artist;
 import mk.ukim.finki.wp.lab.model.Song;
-import mk.ukim.finki.wp.lab.repository.impl.AlbumRepository;
-import mk.ukim.finki.wp.lab.repository.impl.SongRepository;
+//import mk.ukim.finki.wp.lab.repository.impl.AlbumRepository;
+//import mk.ukim.finki.wp.lab.repository.impl.SongRepository;
 import mk.ukim.finki.wp.lab.repository.jpa.AlbumRepositoryJpa;
 import mk.ukim.finki.wp.lab.repository.jpa.SongRepositoryJpa;
 import mk.ukim.finki.wp.lab.service.SongService;
@@ -18,26 +18,38 @@ import java.util.Optional;
 public class SongServiceImpl implements SongService {
 
     private final SongRepositoryJpa songRepositoryJpa;
-    private final SongRepository songRepository;
+//    private final SongRepository songRepository;
     private final AlbumRepositoryJpa albumRepositoryJpa;
 
-    public SongServiceImpl(SongRepositoryJpa songRepositoryJpa, SongRepository songRepository, AlbumRepositoryJpa albumRepositoryJpa) {
+    public SongServiceImpl(SongRepositoryJpa songRepositoryJpa, AlbumRepositoryJpa albumRepositoryJpa) {
         this.songRepositoryJpa = songRepositoryJpa;
-        this.songRepository = songRepository;
         this.albumRepositoryJpa = albumRepositoryJpa;
     }
+
+//    public SongServiceImpl(SongRepositoryJpa songRepositoryJpa, SongRepository songRepository, AlbumRepositoryJpa albumRepositoryJpa) {
+//        this.songRepositoryJpa = songRepositoryJpa;
+//        this.songRepository = songRepository;
+//        this.albumRepositoryJpa = albumRepositoryJpa;
+//    }
 
     @Override
     public List<Song> listSongs() {
         return songRepositoryJpa.findAll();
     }
 
+    //        song.getPerformers().add(artist);
+//        return artist;
+//            artistRepositoryJpa.findAll().removeIf(art -> art.getSongs().contains(song));
+//        artist.getSongs().add(song);
     @Override
     public Artist addArtistToSong(Artist artist, Song song) {
         if(artist == null || song == null)
             return null;
 
-        songRepository.addArtistToSong(artist, song);
+        if(song.getPerformers().contains(artist)){
+            song.getPerformers().remove(artist);
+        }
+        song.getPerformers().add(artist);
         return artist;
     }
 
@@ -47,12 +59,13 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
+    @Transactional
     public Song Save(String trackId, String title, String genre, int releaseYear, Long AlbumId) {
         if(trackId == null)
             return null;
 
         Album album = albumRepositoryJpa.findAll().stream().filter(i -> i.getId().equals(AlbumId)).findFirst().orElse(null);
-        deleteByTrackId(trackId);
+        songRepositoryJpa.deleteByTrackId(trackId);
         Song newSong = new Song(trackId, title, genre, releaseYear, album);
         songRepositoryJpa.save(newSong);
         return newSong;
@@ -74,6 +87,7 @@ public class SongServiceImpl implements SongService {
     public Optional<Song> findBySongId(Long songId) {
         return songRepositoryJpa.findById(songId);
     }
+
 
 
 //

@@ -1,6 +1,6 @@
 package mk.ukim.finki.wp.lab.service;
 
-import mk.ukim.finki.wp.lab.bootstrap.DataHolder;
+//import mk.ukim.finki.wp.lab.bootstrap.DataHolder;
 import mk.ukim.finki.wp.lab.model.Album;
 import mk.ukim.finki.wp.lab.model.Artist;
 import mk.ukim.finki.wp.lab.model.Song;

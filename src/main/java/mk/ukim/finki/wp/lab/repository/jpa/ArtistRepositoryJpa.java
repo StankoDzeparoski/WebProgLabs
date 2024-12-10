@@ -8,9 +8,16 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+
+//    public Song addSongToArtist(Artist artist, Song song){
+//        DataHolder.artists.removeIf(art -> art.getSongs().contains(song));
+//        artist.getSongs().add(song);
+//        return song;
+//    }
 @Repository
 public interface ArtistRepositoryJpa extends JpaRepository<Artist, Long> {
     @Query("SELECT a FROM Artist a WHERE LOWER(a.firstName) LIKE LOWER(CONCAT('%', :name, '%')) OR LOWER(a.lastName) LIKE LOWER(CONCAT('%', :name, '%'))")
     List<Artist> search(String name);
-//    Song addSongToArtist(Artist artist, Song song);
+//    Artist findArtistBy
+//    Artist findArtistByIdMatches(Artist artist);
 }

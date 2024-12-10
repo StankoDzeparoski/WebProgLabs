@@ -2,7 +2,7 @@ package mk.ukim.finki.wp.lab.service.impl;
 
 import mk.ukim.finki.wp.lab.model.Artist;
 import mk.ukim.finki.wp.lab.model.Song;
-import mk.ukim.finki.wp.lab.repository.impl.ArtistRepository;
+//import mk.ukim.finki.wp.lab.repository.impl.ArtistRepository;
 import mk.ukim.finki.wp.lab.repository.jpa.ArtistRepositoryJpa;
 import mk.ukim.finki.wp.lab.service.ArtistService;
 import org.springframework.stereotype.Service;
@@ -13,11 +13,9 @@ import java.util.List;
 public class ArtistServiceImpl implements ArtistService {
 
     private final ArtistRepositoryJpa artistRepositoryJpa;
-    private final ArtistRepository artistRepository;
 
-    public ArtistServiceImpl(ArtistRepositoryJpa artistRepositoryJpa, ArtistRepository artistRepository) {
+    public ArtistServiceImpl(ArtistRepositoryJpa artistRepositoryJpa) {
         this.artistRepositoryJpa = artistRepositoryJpa;
-        this.artistRepository = artistRepository;
     }
 
     @Override
@@ -37,7 +35,11 @@ public class ArtistServiceImpl implements ArtistService {
         if(artist == null || song == null)
             return null;
 
-        artistRepository.addSongToArtist(artist, song);
+        if(artist.getSongs().contains(song)){
+            artist.getSongs().remove(song);
+        }
+//        artistRepositoryJpa.findAll().removeIf(art -> art.getSongs().contains(song));
+        artist.getSongs().add(song);
         return song;
     }
 
